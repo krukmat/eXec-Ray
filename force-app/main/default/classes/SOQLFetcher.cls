@@ -6,6 +6,7 @@ public with sharing class SOQLFetcher extends MetadataFetcher{
     private final string SOQL ='SOQL';
     private static final string FLOWS = 'Flow';
     private static final string PROCESS_BUILDER = 'Workflow';
+    private static final string PROCESS_BUILDER_LABEL = CategorySettingHelper.getCategorySettingByName('ProcessBuilder').label;
     @TestVisible private List<SObject> metadataObjects = new List<SObject>();
 
     /**
@@ -24,10 +25,12 @@ public with sharing class SOQLFetcher extends MetadataFetcher{
                 String query = 'SELECT ' + category.Fields__c+ ' FROM ' + category.ApiName__c + ' WHERE SobjectType IN :sobjectNames';
                 if (FLOWS.equalsIgnoreCase(category.ApiName__c)){
                     query = 'SELECT ' + category.Fields__c+ ' FROM FlowDefinitionView WHERE isActive = True AND '+category.FieldFilter__c;
-                    if (category.Label != 'Process Builders')
+                    if (category.Label != PROCESS_BUILDER_LABEL){
                     	query+=' in :sobjectNames';
-                    else
+                    }
+                    else{
                     	query+= ' like :objectDesc AND ProcessType = :PROCESS_BUILDER';                        
+                    }
                 }
                 metadataObjects.addAll(Database.query(String.escapeSingleQuotes(query)));
             } catch(QueryException e) {
@@ -88,7 +91,7 @@ public with sharing class SOQLFetcher extends MetadataFetcher{
                     newOperation.label = (String)getFieldValue(metadataObject, 'Label');
                     newOperation.developerName = (String)getFieldValue(metadataObject, 'ApiName');
                     newOperation.lastModifiedDate = (Datetime)(getFieldValue(metadataObject, 'LastModifiedDate'  ))  ;
-                    Integer indexCategory = this.getCategoryIndex(CategorySettingHelper.getCategorySettingByName('ProcessBuilder').label);
+                    Integer indexCategory = this.getCategoryIndex(PROCESS_BUILDER_LABEL);
                     //Each record needs to be added to the map with the corresponding SObjectType that it belongs to
                     if (!flowsUnique.contains(processType + newOperation.label)){
                     	this.operationsByObject.get(this.sobjectNames[0])[indexCategory].operations.add(newOperation);                    
