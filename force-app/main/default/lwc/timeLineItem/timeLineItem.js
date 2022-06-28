@@ -13,6 +13,7 @@ import NO_ITEMS_MESSAGE from '@salesforce/label/c.NO_ITEMS_MESSAGE';
  * *************************
  **/
 const RECORD_BEFORE_TRIGGER_FLOW_ICON = "standard:product_request_line_item";
+const RECORD_BEFORE_DELETE_TRIGGER_FLOW_ICON = "standard:record_delete";
 const BEFORE_TRIGGERS_ICON = "standard:coaching";
 const VALIDATION_RULES_ICON = "standard:incident";
 const DUPLICATE_RULES_ICON = "standard:topic";
@@ -35,6 +36,7 @@ const SHARING_RULES_ICON = "standard:service_request_detail";
  * *************************
  **/
 const RECORD_BEFORE_TRIGGER_FLOW_NAME = "Record Before Trigger Flows";
+const RECORD_BEFORE_DELETE_TRIGGER_FLOW_NAME = "Record Before Delete Trigger Flows";
 const BEFORE_TRIGGERS_NAME = "Before Triggers";
 const VALIDATION_RULES_NAME = "Validation Rules";
 const DUPLICATE_RULES_NAME = "Duplicate Rules";
@@ -58,6 +60,7 @@ const SHARING_RULES_NAME = "Sharing Rules";
  **/
 const ICON_BY_CATEGORY_NAME = {
     [RECORD_BEFORE_TRIGGER_FLOW_NAME] : RECORD_BEFORE_TRIGGER_FLOW_ICON,
+    [RECORD_BEFORE_DELETE_TRIGGER_FLOW_NAME]: RECORD_BEFORE_DELETE_TRIGGER_FLOW_ICON,
     [BEFORE_TRIGGERS_NAME] : BEFORE_TRIGGERS_ICON,
     [VALIDATION_RULES_NAME] : VALIDATION_RULES_ICON,
     [DUPLICATE_RULES_NAME] : DUPLICATE_RULES_ICON,
